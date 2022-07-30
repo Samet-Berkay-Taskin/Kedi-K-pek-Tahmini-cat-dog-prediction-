@@ -89,7 +89,7 @@ Burada aslında programımız tamamlandı fakat eğer bu eğitilmiş programı a
 ```Python
 cnn.save('kedi-kopek.h5') 
 ```
-Eğitilmiş programı bu kod ile çalıştırabilirsin.Bu kodu istediğniz Python IDE'sinde kullanabilirsiniz.
+Eğitilmiş programı bu kod ile çalıştırabilirsin.Bu kodu istediğniz Python IDE'sinde kullanabilirsiniz.Bir sonraki Repimde eğitilmiş programla pycharmda çalışabilirsiniz.
 ```Python
 from keras.models import load_model
 
