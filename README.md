@@ -7,8 +7,8 @@ Eğer güçlü bir GPU'nuz yok ise Google Colab'ta eğitimi gerçekleştirmenizi
 
 Colab'a Google Drive'nizi bağlayın.Verisetimizi yüklemek aşağıdaki kod ile gerçekleşiyor.
 
-'''Python
+```Python
 import numpy as np
 import tensorflow as tf
 from keras_preprocessing.image import ImageDataGenerator
-'''
+```
