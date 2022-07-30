@@ -41,7 +41,7 @@ Burada CNN(Evrişimsel sinir ağı) modeli oluşturulacak.
 ```Python
 cnn = tf.keras.models.Sequential()
 ```
-Burada Evrişim Katmanı (CONV) layers.Conv2D kodunda bunu gerçekleştiriyor.Bu katmanda resmin özellikleri saptamak için kullanılır.Pooling katmanı, layers.MaxPooling2D kodunda bunu gerçekleştiriyor.Bu katmanın görevi, gösterimin kayma boyutunu ve ağ içindeki parametreleri ve hesaplama sayısını azaltmak içindir.Birçok Pooling işlemleri vardır, fakat burada maxpooling kullanıldı.
+Burada convolutional(evrişim) Katmanı, kod olarak layers.Conv2D bunu gerçekleştiriyor.Bu katmanda resmin özellikleri saptamak için kullanılır.Pooling (havuzlama) katmanı bu katmanın görevi, gösterimin kayma boyutunu ve ağ içindeki parametreleri ve hesaplama sayısını azaltmak içindir.Birçok Pooling işlemi vardır, fakat burada maxpooling kullanıldı.Kod olarak layers.MaxPooling2D bunu gerçekleştiriyor.
 ```Python
 cnn.add(tf.keras.layers.Conv2D(filters=32,kernel_size=3,activation='relu',input_shape=[64,64,3])) 
 cnn.add(tf.keras.layers.MaxPooling2D(pool_size=2,strides=2))
@@ -50,10 +50,43 @@ cnn.add(tf.keras.layers.MaxPooling2D(pool_size=2,strides=2))
 cnn.add(tf.keras.layers.Conv2D(filters=32,kernel_size=3,activation='relu'))
 cnn.add(tf.keras.layers.MaxPooling2D(pool_size=2,strides=2))
 ```
-Burada son olarak Flattening katmanı var.Bu katmanın görevi basitçe, son ve en önemli katman olan Fully Connected Layer’ın girişindeki verileri hazırlamaktır.
+Burada son olarak Flattening katmanı var.Bu katmanın görevi basitçe, son ve en önemli katman olan fully connected katmanı’nın (sinir ağına) girişindeki verileri hazırlamaktır.Sinir ağları, giriş verilerini tek boyutlu bir diziden alır. Bu da sinir ağındaki veriler ise convolutional(Evrişim) ve pooling(Havuzlama) katmanından gelen matrixlerin tek boyutlu diziye çevrilmiş halidir.
 ```Python
 cnn.add(tf.keras.layers.Flatten())
 ```
+Şimdi ise cully connected katmanına verileri flattening işleminden alır ve Sinir ağı yoluyla öğrenme işlemini geçekleştirir.
+Bu katman başlı başına bir sinir ağıdır.
 ```Python
-
+cnn.add(tf.keras.layers.Dense(units=128,activation='relu'))
+cnn.add(tf.keras.layers.Dense(units=1,activation='sigmoid'))
+cnn.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
+cnn.fit(x=train_set, validation_data=test_set, epochs=25)
 ```
+```Python
+from keras.preprocessing import image
+```
+Verilen resmin tahmin kısmı.Sigmoid fonksiyonunda değerler 0 ile 1 arasındadır.Dolayısıyla verilen resmin sonucu eğer 1'e yakın ise köpek 0'a yakın ise kedi sonucunu döndürüyor.
+```Python
+test_foto1 = image.load_img('../content/dataset/MyDrive/dataset/single_prediction/cat3.jpg', target_size=(64,64))
+test_foto1 = image.img_to_array(test_foto1)
+test_foto1 = test_foto1/255
+test_foto1 = np.expand_dims(test_foto1, axis=0)
+sonuc1 = cnn.predict(test_foto1)
+train_set.class_indices 
+if sonuc1[0][0] > 0.5:
+    Prediction = 'Dog'
+else:
+    Prediction = 'Cat'
+print(Prediction)
+```
+Burada aslında programımız tamamlandı fakat eğer bu eğitilmiş programı alıp Pyhcarm veya kendiniz herhangi bir Python IDE'de çalıştırmak isterseniz eğtim bittikten sonrar bu kodla kaydedebilirsiniz.HDF5 formatında kaydeder.Bunu colabte eğitimden sonra yapın.
+```Python
+cnn.save('kedi-kopek.h5') 
+``
+Eğitilmiş programı bu kod ile çalıştırabilirsin.Bu kodu istediğniz Python IDE'sinde kullanabilirsiniz.
+```Python
+from keras.models import load_model
+
+new_model = load_model('kedi-kopek.h5')
+new_model.summary()
+``
