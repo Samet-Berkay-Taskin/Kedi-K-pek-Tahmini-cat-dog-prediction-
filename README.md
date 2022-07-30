@@ -84,10 +84,11 @@ print(Prediction)
 Burada aslında programımız tamamlandı fakat eğer bu eğitilmiş programı alıp Pyhcarm veya kendiniz herhangi bir Python IDE'de çalıştırmak isterseniz eğtim bittikten sonrar bu kodla kaydedebilirsiniz.HDF5 formatında kaydeder.Bunu colabte eğitimden sonra yapın.
 ```Python
 cnn.save('kedi-kopek.h5') 
-``
+```
 Eğitilmiş programı bu kod ile çalıştırabilirsin.Bu kodu istediğniz Python IDE'sinde kullanabilirsiniz.
 ```Python
 from keras.models import load_model
+
 new_model = load_model('kedi-kopek.h5')
 new_model.summary()
 ```
