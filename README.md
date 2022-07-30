@@ -88,7 +88,6 @@ cnn.save('kedi-kopek.h5')
 Eğitilmiş programı bu kod ile çalıştırabilirsin.Bu kodu istediğniz Python IDE'sinde kullanabilirsiniz.
 ```Python
 from keras.models import load_model
-
 new_model = load_model('kedi-kopek.h5')
 new_model.summary()
 ```
