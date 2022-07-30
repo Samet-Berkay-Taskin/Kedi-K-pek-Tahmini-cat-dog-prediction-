@@ -66,8 +66,10 @@ cnn.fit(x=train_set, validation_data=test_set, epochs=25)
 from keras.preprocessing import image
 ```
 Verilen resmin tahmin kısmı.Sigmoid fonksiyonunda değerler 0 ile 1 arasındadır.Dolayısıyla verilen resmin sonucu eğer 1'e yakın ise köpek 0'a yakın ise kedi sonucunu döndürüyor.
+Şimdiki göstereceğim kodda elimizdeki dosyadaki fotoğrafları istediğiniz gibi tahmin ettirtebilirsiniz. 
+test_foto1 = image.load_img('../content/dataset/MyDrive/dataset/single_prediction/cat2 <<<<<------ burayı cat1 cat5 veya dog1 dog 3 yapabilirsiniz single_prediction dosyasına kendiniz kedi köpek resmi koyup onlarıda deneyebilirsiniz.
 ```Python
-test_foto1 = image.load_img('../content/dataset/MyDrive/dataset/single_prediction/cat3.jpg', target_size=(64,64))
+test_foto1 = image.load_img('../content/dataset/MyDrive/dataset/single_prediction/cat2.jpg', target_size=(64,64))
 test_foto1 = image.img_to_array(test_foto1)
 test_foto1 = test_foto1/255
 test_foto1 = np.expand_dims(test_foto1, axis=0)
