@@ -54,18 +54,22 @@ Burada son olarak Flattening katmanı var.Bu katmanın görevi basitçe, son ve 
 ```Python
 cnn.add(tf.keras.layers.Flatten())
 ```
-Şimdi ise cully connected katmanına verileri flattening işleminden alır ve Sinir ağı yoluyla öğrenme işlemini geçekleştirir.
+Şimdi ise fully connected katmanına verileri flattening işleminden alır ve Sinir ağı yoluyla öğrenme işlemini geçekleştirir.
 Bu katman başlı başına bir sinir ağıdır.
 ```Python
 cnn.add(tf.keras.layers.Dense(units=128,activation='relu'))
-cnn.add(tf.keras.layers.Dense(units=1,activation='sigmoid'))
-cnn.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
+cnn.add(tf.keras.layers.Dense(units=1,activation='sigmoid')) # Burası çıkış katmanı
+```
+Eğitime başlasın.Burası biraz uzun sürebilir.
+```Python
+cnn.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy']) 
 cnn.fit(x=train_set, validation_data=test_set, epochs=25)
 ```
+Artık verilen resmin tahmin kısmına başlayabiliriz.
 ```Python
 from keras.preprocessing import image
 ```
-Verilen resmin tahmin kısmı.Sigmoid fonksiyonunda değerler 0 ile 1 arasındadır.Dolayısıyla verilen resmin sonucu eğer 1'e yakın ise köpek 0'a yakın ise kedi sonucunu döndürüyor.
+Sigmoid fonksiyonunda değerler 0 ile 1 arasındadır.Dolayısıyla verilen resmin sonucu eğer 1'e yakın ise köpek 0'a yakın ise kedi sonucunu döndürüyor.
 Şimdiki göstereceğim kodda elimizdeki dosyadaki fotoğrafları istediğiniz gibi tahmin ettirtebilirsiniz. 
 test_foto1 = image.load_img('../content/dataset/MyDrive/dataset/single_prediction/cat2 <<<<<------ burayı cat1 cat5 veya dog1 dog 3 yapabilirsiniz single_prediction dosyasına kendiniz kedi köpek resmi koyup onlarıda deneyebilirsiniz.
 ```Python
